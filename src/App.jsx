@@ -85,11 +85,18 @@ function App() {
   ]
 
   return (
-    <div className="noise-bg min-h-screen flex flex-col items-center px-4 sm:px-5 py-10 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
+    <div className="noise-bg min-h-screen flex flex-col items-center justify-center px-4 sm:px-5 py-10 sm:py-16 relative" style={{ backgroundColor: '#000000' }}>
       {/* 3D Dotted Surface background */}
       <DottedSurface />
 
       <div className="relative z-10 w-full max-w-[420px] flex flex-col items-center">
+        {/* Small logo */}
+        <img
+          src={logoGrande}
+          alt="WebWise"
+          className="w-12 sm:w-14 h-auto mb-5 opacity-90"
+        />
+
         {/* Est. */}
         <p
           className="text-center mb-4"

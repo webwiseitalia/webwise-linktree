@@ -89,7 +89,7 @@ export default function DottedSurface() {
 
       geometry.attributes.position.needsUpdate = true
       renderer.render(scene, camera)
-      count += 0.1
+      count += 0.03
     }
 
     animate()
