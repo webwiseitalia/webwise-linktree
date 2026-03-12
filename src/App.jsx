@@ -1,4 +1,6 @@
-import logoWebwise from './assets/asset/logo-webwise-bianco.webp'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import logoGrande from './assets/asset/asset-1.webp'
 
 const GlobeIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -33,6 +35,34 @@ const TikTokIcon = () => (
 )
 
 function App() {
+  const logoRef = useRef(null)
+  const trackRef = useRef(null)
+
+  useEffect(() => {
+    const logo = logoRef.current
+    const track = trackRef.current
+    if (!logo || !track) return
+
+    const trackWidth = track.offsetWidth
+    const logoSize = logo.offsetWidth
+    const distance = trackWidth - logoSize
+
+    const tl = gsap.timeline({ repeat: -1, yoyo: true })
+
+    tl.fromTo(
+      logo,
+      { x: -distance / 2, rotation: 0 },
+      {
+        x: distance / 2,
+        rotation: 360 * 2,
+        duration: 4,
+        ease: 'power1.inOut',
+      }
+    )
+
+    return () => tl.kill()
+  }, [])
+
   const links = [
     { icon: <GlobeIcon />, label: 'Sito Web', url: 'https://webwiseitalia.com/' },
     { icon: <DiscordIcon />, label: 'Discord', url: 'https://discord.webwiseitalia.com' },
@@ -53,28 +83,44 @@ function App() {
       />
 
       <div className="relative z-10 w-full max-w-[420px] flex flex-col items-center">
-        {/* Logo */}
-        <div className="animate-logo mb-8">
-          <img
-            src={logoWebwise}
-            alt="WebWise Italia"
-            className="h-10 sm:h-12 w-auto"
-          />
-        </div>
-
         {/* Title */}
         <h1
-          className="animate-title text-center mb-3"
+          className="animate-logo text-center mb-4"
           style={{
             fontFamily: "'Moderniz', sans-serif",
-            fontSize: 'clamp(2rem, 6vw, 3rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 4rem)',
             color: '#FFFFFF',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
           }}
         >
-          WEBWISE ITALIA
+          WEBWISE
         </h1>
+
+        {/* Rolling Logo */}
+        <div
+          ref={trackRef}
+          className="animate-title mb-6 w-full relative"
+          style={{ overflow: 'hidden' }}
+        >
+          <div className="flex items-end justify-center" style={{ minHeight: '140px' }}>
+            <img
+              ref={logoRef}
+              src={logoGrande}
+              alt="WebWise Italia"
+              className="w-28 sm:w-32 h-auto"
+              style={{ willChange: 'transform' }}
+            />
+          </div>
+          {/* Road line */}
+          <div
+            style={{
+              height: '1px',
+              background: 'linear-gradient(90deg, transparent 0%, rgba(46,186,235,0.4) 20%, rgba(46,186,235,0.4) 80%, transparent 100%)',
+              marginTop: '4px',
+            }}
+          />
+        </div>
 
         {/* Tagline */}
         <p
