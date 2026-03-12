@@ -58,7 +58,7 @@ function App() {
 
     const trackWidth = track.offsetWidth
     const logoSize = logo.offsetWidth
-    const distance = trackWidth - logoSize
+    const distance = Math.max(0, trackWidth - logoSize - 20)
 
     const tl = gsap.timeline({ repeat: -1, yoyo: true })
 
