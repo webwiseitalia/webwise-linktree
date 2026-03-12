@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import logoGrande from './assets/asset/asset-1.webp'
 
@@ -37,6 +37,18 @@ const TikTokIcon = () => (
 function App() {
   const logoRef = useRef(null)
   const trackRef = useRef(null)
+  const titleText = 'WEBWISE'
+  const [displayedTitle, setDisplayedTitle] = useState('')
+
+  useEffect(() => {
+    let i = 0
+    const interval = setInterval(() => {
+      i++
+      setDisplayedTitle(titleText.slice(0, i))
+      if (i >= titleText.length) clearInterval(interval)
+    }, 200)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const logo = logoRef.current
@@ -72,29 +84,49 @@ function App() {
   ]
 
   return (
-    <div className="noise-bg min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
-      {/* Background ambient glow */}
+    <div className="min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
+      {/* Grid background */}
       <div
-        className="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse, rgba(46,186,235,0.06) 0%, transparent 60%)',
-          animation: 'glowPulse 8s ease-in-out infinite',
+          backgroundImage: 'linear-gradient(to right, rgba(46, 186, 235, 0.03) 1px, transparent 1px), linear-gradient(rgba(46, 186, 235, 0.03) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+      {/* Center glow */}
+      <div
+        className="fixed pointer-events-none"
+        style={{
+          width: '700px',
+          height: '700px',
+          top: '50%',
+          left: '50%',
+          marginTop: '-350px',
+          marginLeft: '-350px',
+          background: 'radial-gradient(circle, rgba(46, 186, 235, 0.15) 0%, rgba(46, 186, 235, 0.08) 25%, rgba(46, 186, 235, 0.03) 45%, transparent 70%)',
+          filter: 'blur(40px)',
+          borderRadius: '50%',
+          animation: 'bgGlowPulse 5s ease-in-out infinite',
         }}
       />
 
       <div className="relative z-10 w-full max-w-[420px] flex flex-col items-center">
         {/* Title */}
         <h1
-          className="animate-logo text-center mb-4"
+          className="text-center mb-4"
           style={{
             fontFamily: "'Moderniz', sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 4rem)',
             color: '#FFFFFF',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
+            minHeight: '1.1em',
           }}
         >
-          WEBWISE
+          {displayedTitle}
+          {displayedTitle.length < titleText.length && (
+            <span className="typing-cursor">|</span>
+          )}
         </h1>
 
         {/* Rolling Logo */}
@@ -143,7 +175,7 @@ function App() {
         </div>
 
         {/* Links */}
-        <nav className="w-full flex flex-col gap-3">
+        <nav className="w-full flex flex-col gap-4">
           {links.map((link, i) => (
             <div key={i} className="link-item">
               <a
