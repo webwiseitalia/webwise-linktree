@@ -84,29 +84,13 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
-      {/* Grid background */}
+    <div className="noise-bg min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
+      {/* Background ambient glow */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(46, 186, 235, 0.03) 1px, transparent 1px), linear-gradient(rgba(46, 186, 235, 0.03) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-      {/* Center glow */}
-      <div
-        className="fixed pointer-events-none"
-        style={{
-          width: '700px',
-          height: '700px',
-          top: '50%',
-          left: '50%',
-          marginTop: '-350px',
-          marginLeft: '-350px',
-          background: 'radial-gradient(circle, rgba(46, 186, 235, 0.15) 0%, rgba(46, 186, 235, 0.08) 25%, rgba(46, 186, 235, 0.03) 45%, transparent 70%)',
-          filter: 'blur(40px)',
-          borderRadius: '50%',
-          animation: 'bgGlowPulse 5s ease-in-out infinite',
+          background: 'radial-gradient(ellipse, rgba(46,186,235,0.06) 0%, transparent 60%)',
+          animation: 'glowPulse 8s ease-in-out infinite',
         }}
       />
 
