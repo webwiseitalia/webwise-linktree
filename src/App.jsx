@@ -85,7 +85,7 @@ function App() {
   ]
 
   return (
-    <div className="noise-bg min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
+    <div className="noise-bg min-h-screen flex flex-col items-center px-4 sm:px-5 py-10 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
       {/* 3D Dotted Surface background */}
       <DottedSurface />
 
@@ -129,12 +129,12 @@ function App() {
           className="animate-title mb-6 w-full relative"
           style={{ overflow: 'hidden' }}
         >
-          <div className="flex items-end justify-center" style={{ minHeight: '140px' }}>
+          <div className="flex items-end justify-center" style={{ minHeight: 'clamp(90px, 20vw, 140px)' }}>
             <img
               ref={logoRef}
               src={logoGrande}
               alt="WebWise Italia"
-              className="w-28 sm:w-32 h-auto"
+              className="w-20 sm:w-32 h-auto"
               style={{ willChange: 'transform' }}
             />
           </div>
@@ -169,7 +169,7 @@ function App() {
         </div>
 
         {/* Links */}
-        <nav className="w-full flex flex-col gap-4">
+        <nav className="w-full flex flex-col gap-3 sm:gap-4">
           {links.map((link, i) => (
             <div key={i} className="link-item">
               <a

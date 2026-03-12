@@ -207,3 +207,24 @@ body {
   background: #2EBAEB;
   margin: 0 auto;
 }
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  .link-btn {
+    padding: 16px 18px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+  }
+
+  .link-btn .link-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    margin-right: 14px;
+  }
+
+  .link-btn .link-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+}
