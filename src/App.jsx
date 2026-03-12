@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import logoGrande from './assets/asset/asset-1.webp'
+import DottedSurface from './components/DottedSurface'
 
 const GlobeIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -67,8 +68,8 @@ function App() {
       {
         x: distance / 2,
         rotation: 360 * 2,
-        duration: 4,
-        ease: 'power1.inOut',
+        duration: 3.5,
+        ease: 'sine.inOut',
       }
     )
 
@@ -85,16 +86,25 @@ function App() {
 
   return (
     <div className="noise-bg min-h-screen flex flex-col items-center px-5 py-16 sm:py-20 relative" style={{ backgroundColor: '#000000' }}>
-      {/* Background ambient glow */}
-      <div
-        className="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(46,186,235,0.06) 0%, transparent 60%)',
-          animation: 'glowPulse 8s ease-in-out infinite',
-        }}
-      />
+      {/* 3D Dotted Surface background */}
+      <DottedSurface />
 
       <div className="relative z-10 w-full max-w-[420px] flex flex-col items-center">
+        {/* Est. */}
+        <p
+          className="text-center mb-4"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '0.75rem',
+            color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            fontWeight: 500,
+          }}
+        >
+          EST. 2022
+        </p>
+
         {/* Title */}
         <h1
           className="text-center mb-4"
@@ -150,7 +160,7 @@ function App() {
             fontWeight: 500,
           }}
         >
-          Agenzia Digitale
+          WEB AGENCY
         </p>
 
         {/* Accent divider */}
